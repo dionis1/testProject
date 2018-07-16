@@ -1,6 +1,6 @@
 <template>
   
-   <div class="column box is-one-quarter">
+   <div class="box is-one-quarter">
       <h2 class="tile is-2">Title</h2>
        <ul v-for="product in products">
         <li>{{ product.name }}</li>
@@ -25,7 +25,6 @@
                 endpoint: 'api/product/show?page='
             };
         },
-
         created() {
             this.fetch();
         },

@@ -1,43 +1,53 @@
 <template>
   
-    <div class="column box">
+    <div class="box">
         <!-- <div class="field is-grouped level">
          <div class="control level-right">
           <button class="button is-primary level-item"> + Create</button>
          </div>
         </div> -->
         <form method="POST" @submit.prevent="onSubmit">
-        <div class="field">
-           <label class="label">Name</label>
-           <div class="control" :class="{'has-error': errors.name}">
-              <input class="input" id="name" v-model="product.name" type="text" placeholder="Name">
-               <span v-if="errors.name" class="notification is-danger is-danger">{{ errors.name[0] }}</span>
-           </div>
-           <p class="help">This is a help text</p>
+        <div class="columns is-mobile">
+            <div class="column">
+                <div class="field">
+                    <label class="label" for="name">Name</label>
+                    <div class="control" :class="{'has-error': errors.name}">
+                        <input class="input" id="name" v-model="product.name" type="text" placeholder="Name">
+                        <span v-if="errors.name" class="notification is-danger is-danger">{{ errors.name[0] }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                <label class="label" for="price">Price</label>
+                    <div class="control" :class="{'has-error': errors.price}">
+                        <input class="input" id="price" v-model="product.price" type="number" placeholder="Price">
+                        <span v-if="errors.price" class="notification is-danger is-danger">{{ errors.price[0] }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="field">
-           <label class="label">Description</label>
-           <div class="control" :class="{'has-error': errors.description}">
-              <textarea  class="textarea" id="description" v-model="product.description" type="text" placeholder="Description"></textarea>
-              <span v-if="errors.description" class="notification is-danger is-danger">{{ errors.description[0] }}</span>
-           </div>
-           <p class="help">This is a help text</p>
+        <div class="columns">
+            <div class="column">
+                <div class="field">
+                    <label class="label" for="quantity">Quantity</label>
+                    <div class="control" :class="{'has-error': errors.quantity}">
+                        <input class="input" id="quantity" v-model="product.quantity" type="number" placeholder="Quantity">
+                        <span v-if="errors.quantity" class="notification is-danger is-danger">{{ errors.quantity[0] }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="field">
-           <label class="label">Price</label>
-           <div class="control" :class="{'has-error': errors.price}">
-              <input class="input" id="price" v-model="product.price" type="number" placeholder="Price">
-              <span v-if="errors.price" class="notification is-danger is-danger">{{ errors.price[0] }}</span>
-           </div>
-           <p class="help">This is a help text</p>
-        </div>
-        <div class="field">
-           <label class="label">Quantity</label>
-           <div class="control" :class="{'has-error': errors.quantity}">
-              <input class="input" id="quantity" v-model="product.quantity" type="number" placeholder="Quantity">
-              <span v-if="errors.quantity" class="notification is-danger is-danger">{{ errors.quantity[0] }}</span>
-           </div>
-           <p class="help">This is a help text</p>
+        <div class="columns">
+            <div class="column">
+                <div class="field">
+                    <label class="label" for="description">Description</label>
+                    <div class="control" :class="{'has-error': errors.description}">
+                        <textarea  class="textarea" id="description" v-model="product.description" type="text" placeholder="Description"></textarea>
+                        <span v-if="errors.description" class="notification is-danger is-danger">{{ errors.description[0] }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="field is-grouped ">
          <div class="control level-right">
@@ -64,10 +74,8 @@
         },
         methods: {
             onSubmit() {
-               console.log('onSubmit');
                axios.post('api/product', this.product)
                     .then(({data}) => this.setSuccessMessage(data))
-
                     .catch(({response}) => this.setErrors(response));
             },
             setErrors(response) {
