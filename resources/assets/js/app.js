@@ -23,6 +23,9 @@ Vue.use(VueSweetalert2);
  */
 
 Vue.component('create-component', require('./components/createComponent.vue'));
+Vue.component('show-component', require('./components/showComponent.vue'));
+
+Vue.component('paginate', require('vuejs-paginate'));
 
 const app = new Vue({
     el: '#app'

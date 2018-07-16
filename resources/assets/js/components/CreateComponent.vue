@@ -66,14 +66,16 @@
             onSubmit() {
                console.log('onSubmit');
                axios.post('api/product', this.product)
-                    .then(({data}) => this.setSuccessMessage())
+                    .then(({data}) => this.setSuccessMessage(data))
+
                     .catch(({response}) => this.setErrors(response));
             },
             setErrors(response) {
                 this.errors = this.response.data.errors;
                 
             },
-            setSuccessMessage() {
+            setSuccessMessage(data) {
+                this.$root.$emit('created', data);
                 Vue.swal(
                     'Product is successfully created!',
                     'Good job!',

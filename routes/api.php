@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::any('product', 'ProductController@store');
+
+Route::any('product/show', 'ProductController@index');

@@ -8,8 +8,17 @@ use App\Product;
 use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
-{
-    public function store(Request $request){
+{   
+	public function index()
+	{
+      $products = Product::latest()
+            ->paginate(15);
+
+        return ProductResource::collection($products);
+	}
+
+    public function store(Request $request)
+    {
 
     	$product = $this->validate($request, [
             'name' => 'required',
