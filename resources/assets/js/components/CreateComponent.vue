@@ -70,18 +70,19 @@
                     .catch(({response}) => this.setErrors(response));
             },
             setErrors(response) {
-                console.log(this.response);
-                this.errors = response.data.errors;
+                this.errors = this.response.data.errors;
                 
             },
             setSuccessMessage() {
-                console.log('setSuccessMessage');
-                Swal('Hello world!');
+                Vue.swal(
+                    'Product is successfully created!',
+                    'Good job!',
+                    'success'
+                    );
                 this.reset();
                 
             },
             reset() {
-                console.log('reset');
                 this.errors = [];
                 this.product = {name: null, description: null, price: null, quantity: null};
             }
