@@ -11515,6 +11515,17 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 
+input[type='number'],
+textarea {
+  -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .title {
   text-align: center;
   font-size: 3rem !important;
@@ -11530,12 +11541,11 @@ label.panel-block:hover {
 .box {
   padding: 1.8rem;
   background-color: white;
-  border-radius: 2px;
-  -webkit-box-shadow: 0 2px 10px rgba(10, 10, 10, 0.78) 0 0 0 1px rgba(10, 10, 10, 0.1) !important;
-          box-shadow: 0 2px 10px rgba(10, 10, 10, 0.78) 0 0 0 1px rgba(10, 10, 10, 0.1) !important;
+  -webkit-box-shadow: 0px 5px 17px #292929, 0 0 0 1px rgba(10, 10, 10, 0.04) !important;
+          box-shadow: 0px 5px 17px #292929, 0 0 0 1px rgba(10, 10, 10, 0.04) !important;
   color: #4a4a4a;
   display: block;
-  padding: 1.25rem;
+  border-radius: 2px !important;
 }
 
 @media (min-width: 992px) {
@@ -11544,8 +11554,44 @@ label.panel-block:hover {
   }
 }
 
-input {
-  border-radius: 0 !important;
+#name,
+#price,
+#email,
+#description,
+#quantity {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0;
+  border: none;
+  border-bottom: 1px solid #dbdbdb;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-radius: 0;
+}
+
+#name:hover,
+#price:hover,
+#email:hover,
+#description:hover,
+#quantity:hover {
+  border-color: #7a7a7a;
+}
+
+#name:active,
+#name:focus,
+#price:active,
+#price:focus,
+#email:active,
+#email:focus,
+#description:active,
+#description:focus,
+#quantity:active,
+#quantity:focus {
+  border-color: #00d1b2;
 }
 
 .title-underline {
@@ -11557,5 +11603,14 @@ input {
   .level-item {
     display: block;
   }
+}
+
+.form-padding {
+  padding: 1.8rem 1.5rem !important;
+}
+
+.pagination-next,
+.pagination-previous {
+  width: 100px !important;
 }
 

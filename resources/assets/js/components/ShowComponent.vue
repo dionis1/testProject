@@ -1,5 +1,5 @@
 <template>
-  
+
    <div class="box is-one-quarter">
       <h2 class="tile is-2">Title</h2>
        <ul v-for="product in products">
@@ -12,9 +12,9 @@
                 :next-text="'Next'"
                 :container-class="'pagination'">
       </paginate>
-     </div> 
-   
+    </div>    
 </template>
+
 
 <script>
     export default {
