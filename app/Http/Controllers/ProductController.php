@@ -9,7 +9,12 @@ use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {   
-	public function index()
+
+	public function index(){
+       return view('content.createProduct');
+	}
+
+	public function show()
 	{
       $products = Product::latest()
             ->paginate(15);

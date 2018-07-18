@@ -21,8 +21,10 @@ Vue.use(VueSweetalert2);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('create-component', require('./components/createComponent.vue'));
-Vue.component('show-component', require('./components/showComponent.vue'));
+Vue.component('create-product-component', require('./components/product/CreateProductComponent.vue'));
+Vue.component('show-product-component', require('./components/product/ShowProductComponent.vue'));
+
+Vue.component('create-order-component', require('./components/order/CreateOrderComponent.vue'));
 
 Vue.component('paginate', require('vuejs-paginate'));
 

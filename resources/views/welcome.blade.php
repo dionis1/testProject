@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Test Project</title>
+      <title>@yield('title')</title>
 
 
       <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -19,61 +19,16 @@
       <div id="app">
          <section class="hero is-primary is-medium">
             <!-- Hero head: will stick at the top -->
-           <nav class="navbar">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
-                </a>
-                <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-                <span></span>
-                <span></span>
-                <span></span>
-                </div>
-            </div>
-
-            <div id="navbarExampleTransparentExample" class="navbar-menu">
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="field is-grouped">
-                            <p class="control">
-                                <a class="button is-primary" href="https://github.com/jgthms/bulma/releases/download/0.7.1/bulma-0.7.1.zip">
-                                <span>Home</span>
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           </nav>
+           @include('defaults.header')
             
             <!-- Hero content: will be in the middle -->
-            <div class="section form-padding">
-               <div class="container is-fluid">
-                  <h1 class="title">Title</h1>
-                  <hr class="title-underline">
-                  <div class="columns mobile">
-                      
-                      <create-component></create-component>
-                      
-                      <show-component></show-component>
-                  </div>
-               </div>
-            </div>
+
+             @yield('content')
+
+
+
             <!-- Hero footer: will stick at the bottom -->
-            <div class="hero-foot is-mobile">
-               <nav class="tabs">
-                  <div class="container">
-                     <ul>
-                        <li><a>Overview</a></li>
-                        <li><a>Modifiers</a></li>
-                        <li><a>Grid</a></li>
-                        <li><a>Elements</a></li>
-                        <li><a>Components</a></li>
-                        <li><a>Layout</a></li>
-                     </ul>
-                  </div>
-               </nav>
-            </div>
+            @include('defaults.footer')
          </section>
       </div>
    </body>
