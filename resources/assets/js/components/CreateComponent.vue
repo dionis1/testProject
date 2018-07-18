@@ -1,11 +1,6 @@
 <template>
   
     <div class="column box">
-        <!-- <div class="field is-grouped level">
-         <div class="control level-right">
-          <button class="button is-primary level-item"> + Create</button>
-         </div>
-        </div> -->
         <form method="POST" @submit.prevent="onSubmit">
         <div class="columns is-mobile">
             <div class="column">

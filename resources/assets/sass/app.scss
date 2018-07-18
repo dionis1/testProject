@@ -28,7 +28,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: block;
     border-radius: 2px!important;
     padding: 1.8rem!important;
-
+    
     @media (min-width: 992px) {
         padding: 2.5rem!important;
     }
@@ -77,8 +77,11 @@ input[type=number]::-webkit-outer-spin-button {
     width: 100px!important;
 }
 
+
 .column:not(:last-child) {
-    margin-right: 0.8rem;
+    @media (min-width: 769px) {
+        margin-right: 0.8rem;
+    }
 }
 
 .tile {
@@ -91,7 +94,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .box:not(:last-child) {
-    margin-bottom: 0!important; 
+    @media (min-width: 769px) {
+        margin-bottom: 0!important; 
+    }
 }
 
 @media (min-width: 769px){
