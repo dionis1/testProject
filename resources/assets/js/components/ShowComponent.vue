@@ -35,7 +35,6 @@
             this.fetch();
           })
         },
-
         methods: {
             fetch(page = 1) {
                 axios.get(this.endpoint + page)

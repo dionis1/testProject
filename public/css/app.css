@@ -11614,8 +11614,8 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100px !important;
 }
 
-.column {
-  margin: 0.4rem;
+.column:not(:last-child) {
+  margin-right: 0.8rem;
 }
 
 .tile {
@@ -11626,5 +11626,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 .tile-margins {
   margin: 0.5rem;
+}
+
+.box:not(:last-child) {
+  margin-bottom: 0 !important;
 }
 

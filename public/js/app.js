@@ -51990,7 +51990,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
 
-
     methods: {
         fetch: function fetch() {
             var _this2 = this;
