@@ -52018,7 +52018,7 @@ var render = function() {
       _c("hr", { staticClass: "tile-margins" }),
       _vm._v(" "),
       _vm._l(_vm.products, function(product) {
-        return _c("ul", { staticClass: "has-text-centered" }, [
+        return _c("ul", { key: product.id, staticClass: "has-text-centered" }, [
           _c("li", [_vm._v(_vm._s(product.name))])
         ])
       }),
