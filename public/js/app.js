@@ -51637,7 +51637,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "box" }, [
+  return _c("div", { staticClass: "column box" }, [
     _c(
       "form",
       {
@@ -51968,6 +51968,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -52015,13 +52017,19 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "box is-one-quarter" },
+    { staticClass: "column box is-one-quarter" },
     [
-      _c("h2", { staticClass: "tile is-2" }, [_vm._v("Title")]),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("hr", { staticClass: "tile-margins" }),
       _vm._v(" "),
       _vm._l(_vm.products, function(product) {
-        return _c("ul", [_c("li", [_vm._v(_vm._s(product.name))])])
+        return _c("ul", { staticClass: "has-text-centered" }, [
+          _c("li", [_vm._v(_vm._s(product.name))])
+        ])
       }),
+      _vm._v(" "),
+      _c("hr", { staticClass: "tile-margins" }),
       _vm._v(" "),
       _c("paginate", {
         attrs: {
@@ -52036,7 +52044,16 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", { staticClass: "tile" }, [
+      _c("strong", { staticClass: "has-text-centered" }, [_vm._v("Titles")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

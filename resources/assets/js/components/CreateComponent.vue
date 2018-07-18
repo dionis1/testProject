@@ -1,6 +1,6 @@
 <template>
   
-    <div class="box">
+    <div class="column box">
         <!-- <div class="field is-grouped level">
          <div class="control level-right">
           <button class="button is-primary level-item"> + Create</button>

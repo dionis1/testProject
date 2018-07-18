@@ -28,7 +28,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: #4a4a4a;
     display: block;
     border-radius: 2px!important;
-    
+
     @media (min-width: 992px) {
         padding: 2.5rem!important;
     }
@@ -75,4 +75,17 @@ input[type=number]::-webkit-outer-spin-button {
 .pagination-next,
 .pagination-previous {
     width: 100px!important;
+}
+
+.column {
+    margin: 0.4rem;
+}
+
+.tile {
+    justify-content: center;
+
+}
+
+.tile-margins {
+    margin: 0.5rem;
 }

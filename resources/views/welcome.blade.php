@@ -51,7 +51,7 @@
                <div class="container is-fluid">
                   <h1 class="title">Title</h1>
                   <hr class="title-underline">
-                  <div class="is-mobile is-4">
+                  <div class="columns is-mobile is-4">
                       
                       <create-component></create-component>
                       
