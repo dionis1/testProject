@@ -22,7 +22,9 @@
            @include('defaults.header')
             
             <!-- Hero content: will be in the middle -->
+
              @yield('content')
+
 
 
             <!-- Hero footer: will stick at the bottom -->

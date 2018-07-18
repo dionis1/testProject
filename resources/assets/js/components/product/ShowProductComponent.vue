@@ -1,10 +1,12 @@
 <template>
 
-   <div class="box is-one-quarter">
-      <h2 class="tile is-2">Title</h2>
-       <ul v-for="product in products">
+   <div class="column box is-one-quarter">
+      <h2 class="tile"><strong class="has-text-centered">Titles</strong></h2>
+      <hr class="tile-margins">
+       <ul v-for="product in products" class="has-text-centered">
         <li>{{ product.name }}</li>
        </ul>
+       <hr class="tile-margins">
       <paginate
                 :page-count="pageCount"
                 :click-handler="fetch"
@@ -33,7 +35,6 @@
             this.fetch();
           })
         },
-
         methods: {
             fetch(page = 1) {
                 axios.get(this.endpoint + page)
