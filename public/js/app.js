@@ -52160,9 +52160,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -52172,8 +52169,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 product: null,
                 price: null,
                 quantity: null
-            }
+            },
+            products: []
         };
+    },
+    created: function created() {
+        this.getProducts();
+    },
+
+    methods: {
+        getProducts: function getProducts() {
+            var _this = this;
+
+            axios.get('api/product/show').then(function (data) {
+                var products = data.data.data;
+                for (var prod in products) {
+                    _this.products.push(products[prod]);
+                }
+            });
+        }
     }
 });
 
@@ -52227,17 +52241,11 @@ var render = function() {
                     }
                   }
                 },
-                [
-                  _c("option", [_vm._v("Select dropdown")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Product 1")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Product 2")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Product 3")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Product 4")])
-                ]
+                _vm._l(_vm.products, function(product) {
+                  return _c("option", { key: product.id }, [
+                    _vm._v(_vm._s(product.name))
+                  ])
+                })
               )
             ])
           ])

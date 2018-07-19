@@ -9,12 +9,9 @@
                 <div class="field">
                     <label class="label" for="product">Product</label>
                     <div class="select">
-                      <select id="product" v-model="order.product">
-                        <option>Select dropdown</option>
-                        <option>Product 1</option>
-                        <option>Product 2</option>
-                        <option>Product 3</option>
-                        <option>Product 4</option>
+                      <select id="product" v-model="order.product" >
+                        
+                        <option v-for="product in products" :key="product.id">{{product.name}}</option>
                       </select>
                     </div>
                 </div>
@@ -58,8 +55,23 @@
                     product: null,
                     price: null,
                     quantity: null,
-                }
-            };
+                },
+                products: []
+            }
+        },
+        created()  {
+            this.getProducts();
+        },
+        methods: {
+            getProducts(){
+                axios.get('api/product/show')
+                .then(data => {
+                    const products = data.data.data;
+                    for(var prod in products) {
+                        this.products.push(products[prod]);
+                    }
+                })
+            }
         }   
     }
 </script>

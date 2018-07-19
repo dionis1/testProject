@@ -6,7 +6,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>@yield('title')</title>
 
-
       <meta name="csrf-token" content="{{ csrf_token() }}">
       
       <!-- Scripts -->
@@ -24,8 +23,6 @@
             <!-- Hero content: will be in the middle -->
 
              @yield('content')
-
-
 
             <!-- Hero footer: will stick at the bottom -->
             @include('defaults.footer')
