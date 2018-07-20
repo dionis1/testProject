@@ -44,4 +44,32 @@ class ProductController extends Controller
         return new ProductResource($product);
   
      }
+
+     public function update(Request $request , $id){
+
+        $product = $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'quantity'=>'required',
+        ]);
+
+        $product = Product::findorfail($id);
+
+        $product->name =$request->name;
+        $product->description =$request->description;
+        $product->price =$request->price;
+        $product->quantity =$request->quantity;
+
+        $product->update();
+
+        return new ProductResource($product);
+     }
+
+     public function delete($id){
+        $product = Product::findorfail($id);
+        $product->delete();
+
+        return new ProductResource($product);
+     }
 }

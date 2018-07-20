@@ -51585,12 +51585,90 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             errors: [],
+            create: true,
+            edit: false,
             product: {
+                id: null,
                 name: null,
                 description: null,
                 price: null,
@@ -51598,17 +51676,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         };
     },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$root.$on('data', function (data) {
+
+            _this.product.id = data.id, _this.product.name = data.name, _this.product.description = data.description, _this.product.price = data.price, _this.product.quantity = data.quantity, _this.create = false;
+            _this.edit = true;
+        });
+    },
 
     methods: {
-        onSubmit: function onSubmit() {
-            var _this = this;
+        onCreate: function onCreate() {
+            var _this2 = this;
 
             axios.post('api/product', this.product).then(function (_ref) {
                 var data = _ref.data;
-                return _this.setSuccessMessage(data);
+                return _this2.setSuccessMessage(data);
             }).catch(function (_ref2) {
                 var response = _ref2.response;
-                return _this.setErrors(response);
+                return _this2.setErrors(response);
             });
         },
         setErrors: function setErrors(response) {
@@ -51622,6 +51709,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         reset: function reset() {
             this.errors = [];
             this.product = { name: null, description: null, price: null, quantity: null };
+        },
+        goToCreate: function goToCreate() {
+            this.create = true;
+            this.edit = false;
+            this.reset();
+        },
+        onEdit: function onEdit(id) {
+            var _this3 = this;
+
+            axios.post('api/product/' + id, this.product).then(function (_ref3) {
+                var data = _ref3.data;
+                return _this3.setEditSuccessMessage(data);
+            }).catch(function (_ref4) {
+                var response = _ref4.response;
+                return _this3.setEditErrors(response);
+            });
+        },
+        setEditSuccessMessage: function setEditSuccessMessage(data) {
+            this.$root.$emit('created', data);
+            Vue.swal('Product is successfully Edited!', 'Good job!', 'success');
+        },
+        setEditErrors: function setEditErrors(response) {
+            Vue.swal(this.response.data.errors, 'Error', 'error');
+        },
+        onDelete: function onDelete(id) {
+            var _this4 = this;
+
+            Vue.swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function (result) {
+                if (result.value) {
+                    axios.post('api/product/' + id).then(function (_ref5) {
+                        var data = _ref5.data;
+                        return _this4.setDeleteSuccessMessage(data);
+                    }).catch(function (_ref6) {
+                        var response = _ref6.response;
+                        return _this4.setDeleteErrors(response);
+                    });
+                }
+            });
+        },
+        setDeleteSuccessMessage: function setDeleteSuccessMessage(data) {
+            this.goToCreate();
+            this.$root.$emit('created', data);
+            Vue.swal('Deleted!', 'Your file has been deleted.', 'success');
+        },
+        setDeleteErrors: function setDeleteErrors(response) {
+            Vue.swal(this.response.data.errors, 'Error', 'error');
         }
     }
 });
@@ -51635,235 +51776,456 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "column box" }, [
-    _c(
-      "form",
-      {
-        attrs: { method: "POST" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.onSubmit($event)
-          }
-        }
-      },
-      [
-        _c("div", { staticClass: "columns is-mobile" }, [
-          _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "field" }, [
-              _c("label", { staticClass: "label", attrs: { for: "name" } }, [
-                _vm._v("Name")
+    _vm.edit
+      ? _c(
+          "form",
+          {
+            attrs: { method: "POST" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.onEdit(_vm.product.id)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "column" }, [
+              _c("strong", [_vm._v("Edit!")]),
+              _vm._v(
+                " Now you can edit your product or\n         go back to create page "
+              ),
+              _c(
+                "a",
+                {
+                  staticClass: "button is-primary is-rounded",
+                  on: { click: _vm.goToCreate }
+                },
+                [_vm._v("Create")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-mobile" }, [
+              _c("div", { staticClass: "column" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "name" } },
+                    [_vm._v("Name")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "control" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.product.name,
+                          expression: "product.name"
+                        }
+                      ],
+                      staticClass: "input",
+                      attrs: { id: "name", type: "text" },
+                      domProps: { value: _vm.product.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.product, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "control",
-                  class: { "has-error": _vm.errors.name }
-                },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.product.name,
-                        expression: "product.name"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: { id: "name", type: "text", placeholder: "Name" },
-                    domProps: { value: _vm.product.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.product, "name", $event.target.value)
-                      }
-                    }
-                  }),
+              _c("div", { staticClass: "column" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "price" } },
+                    [_vm._v("Price")]
+                  ),
                   _vm._v(" "),
-                  _vm.errors.name
-                    ? _c(
-                        "span",
-                        { staticClass: "notification is-danger is-danger" },
-                        [_vm._v(_vm._s(_vm.errors.name[0]))]
-                      )
-                    : _vm._e()
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "field" }, [
-              _c("label", { staticClass: "label", attrs: { for: "price" } }, [
-                _vm._v("Price")
+                  _c("div", { staticClass: "control" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.product.price,
+                          expression: "product.price"
+                        }
+                      ],
+                      staticClass: "input",
+                      attrs: { id: "price", type: "number" },
+                      domProps: { value: _vm.product.price },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.product, "price", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-mobile" }, [
+              _c("div", { staticClass: "column" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "quantity" } },
+                    [_vm._v("Quantity")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "control" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.product.quantity,
+                          expression: "product.quantity"
+                        }
+                      ],
+                      staticClass: "input",
+                      attrs: { id: "quantity", type: "number" },
+                      domProps: { value: _vm.product.quantity },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.product, "quantity", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "control",
-                  class: { "has-error": _vm.errors.price }
-                },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.product.price,
-                        expression: "product.price"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: {
-                      id: "price",
-                      type: "number",
-                      placeholder: "Price"
-                    },
-                    domProps: { value: _vm.product.price },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+              _vm._m(0)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns" }, [
+              _c("div", { staticClass: "column" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "description" } },
+                    [_vm._v("Description")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "control" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.product.description,
+                          expression: "product.description"
                         }
-                        _vm.$set(_vm.product, "price", $event.target.value)
+                      ],
+                      staticClass: "textarea",
+                      attrs: { id: "description", type: "text" },
+                      domProps: { value: _vm.product.description },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.product,
+                            "description",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "field is-grouped " }, [
+              _c("div", { staticClass: "control" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-primary is-rounded",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Save")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "button is-danger is-rounded",
+                    on: {
+                      click: function($event) {
+                        _vm.onDelete(_vm.product.id)
                       }
                     }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.price
-                    ? _c(
-                        "span",
-                        { staticClass: "notification is-danger is-danger" },
-                        [_vm._v(_vm._s(_vm.errors.price[0]))]
-                      )
-                    : _vm._e()
-                ]
-              )
+                  },
+                  [_vm._v("Delete")]
+                )
+              ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "columns" }, [
-          _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "field" }, [
-              _c(
-                "label",
-                { staticClass: "label", attrs: { for: "quantity" } },
-                [_vm._v("Quantity")]
-              ),
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.create
+      ? _c(
+          "form",
+          {
+            attrs: { method: "POST" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.onCreate($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "columns is-mobile" }, [
+              _c("div", { staticClass: "column" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "name" } },
+                    [_vm._v("Name")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "control",
+                      class: { "has-error": _vm.errors.name }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.product.name,
+                            expression: "product.name"
+                          }
+                        ],
+                        staticClass: "input",
+                        attrs: {
+                          id: "name",
+                          type: "text",
+                          placeholder: "Name"
+                        },
+                        domProps: { value: _vm.product.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.product, "name", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.name
+                        ? _c(
+                            "span",
+                            { staticClass: "notification is-danger is-danger" },
+                            [_vm._v(_vm._s(_vm.errors.name[0]))]
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                ])
+              ]),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "control",
-                  class: { "has-error": _vm.errors.quantity }
-                },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.product.quantity,
-                        expression: "product.quantity"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: {
-                      id: "quantity",
-                      type: "number",
-                      placeholder: "Quantity"
-                    },
-                    domProps: { value: _vm.product.quantity },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.product, "quantity", $event.target.value)
-                      }
-                    }
-                  }),
+              _c("div", { staticClass: "column" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "price" } },
+                    [_vm._v("Price")]
+                  ),
                   _vm._v(" "),
-                  _vm.errors.quantity
-                    ? _c(
-                        "span",
-                        { staticClass: "notification is-danger is-danger" },
-                        [_vm._v(_vm._s(_vm.errors.quantity[0]))]
-                      )
-                    : _vm._e()
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "columns" }, [
-          _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "field" }, [
-              _c(
-                "label",
-                { staticClass: "label", attrs: { for: "description" } },
-                [_vm._v("Description")]
-              ),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "control",
+                      class: { "has-error": _vm.errors.price }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.product.price,
+                            expression: "product.price"
+                          }
+                        ],
+                        staticClass: "input",
+                        attrs: {
+                          id: "price",
+                          type: "number",
+                          placeholder: "Price"
+                        },
+                        domProps: { value: _vm.product.price },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.product, "price", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.price
+                        ? _c(
+                            "span",
+                            { staticClass: "notification is-danger is-danger" },
+                            [_vm._v(_vm._s(_vm.errors.price[0]))]
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-mobile" }, [
+              _c("div", { staticClass: "column" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "quantity" } },
+                    [_vm._v("Quantity")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "control",
+                      class: { "has-error": _vm.errors.quantity }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.product.quantity,
+                            expression: "product.quantity"
+                          }
+                        ],
+                        staticClass: "input",
+                        attrs: {
+                          id: "quantity",
+                          type: "number",
+                          placeholder: "Quantity"
+                        },
+                        domProps: { value: _vm.product.quantity },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.product,
+                              "quantity",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.quantity
+                        ? _c(
+                            "span",
+                            { staticClass: "notification is-danger is-danger" },
+                            [_vm._v(_vm._s(_vm.errors.quantity[0]))]
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                ])
+              ]),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "control",
-                  class: { "has-error": _vm.errors.description }
-                },
-                [
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.product.description,
-                        expression: "product.description"
-                      }
-                    ],
-                    staticClass: "textarea",
-                    attrs: {
-                      id: "description",
-                      type: "text",
-                      placeholder: "Description"
-                    },
-                    domProps: { value: _vm.product.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.product,
-                          "description",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
+              _vm._m(1)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns" }, [
+              _c("div", { staticClass: "column" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "label",
+                    { staticClass: "label", attrs: { for: "description" } },
+                    [_vm._v("Description")]
+                  ),
                   _vm._v(" "),
-                  _vm.errors.description
-                    ? _c(
-                        "span",
-                        { staticClass: "notification is-danger is-danger" },
-                        [_vm._v(_vm._s(_vm.errors.description[0]))]
-                      )
-                    : _vm._e()
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ]
-    )
+                  _c(
+                    "div",
+                    {
+                      staticClass: "control",
+                      class: { "has-error": _vm.errors.description }
+                    },
+                    [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.product.description,
+                            expression: "product.description"
+                          }
+                        ],
+                        staticClass: "textarea",
+                        attrs: {
+                          id: "description",
+                          type: "text",
+                          placeholder: "Description"
+                        },
+                        domProps: { value: _vm.product.description },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.product,
+                              "description",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.description
+                        ? _c(
+                            "span",
+                            { staticClass: "notification is-danger is-danger" },
+                            [_vm._v(_vm._s(_vm.errors.description[0]))]
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(2)
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -51871,15 +52233,59 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field is-grouped " }, [
-      _c("div", { staticClass: "control level-right" }, [
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "field" }, [
+        _c("label", { staticClass: "label", attrs: { for: "location" } }, [
+          _vm._v("Location")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "select" }, [
+          _c("select", { attrs: { id: "Location" } }, [
+            _c("option", [_vm._v("Location 1")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("Location 2")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("Location 3")])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "field" }, [
+        _c("label", { staticClass: "label", attrs: { for: "location" } }, [
+          _vm._v("Location")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "select" }, [
+          _c("select", { attrs: { id: "Location" } }, [
+            _c("option", [_vm._v("Location 1")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("Location 2")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("Location 3")])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field is-grouped" }, [
+      _c("div", { staticClass: "control " }, [
         _c(
           "button",
           {
-            staticClass: "button is-success level-item",
+            staticClass: "button is-primary is-rounded",
             attrs: { type: "submit" }
           },
-          [_vm._v("Save")]
+          [_vm._v("Create")]
         )
       ])
     ])
@@ -51964,9 +52370,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -51995,10 +52398,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get(this.endpoint + page).then(function (_ref) {
                 var data = _ref.data;
-
-                _this2.products = data.data;
-                _this2.pageCount = data.meta.last_page;
+                return _this2.setSuccessMessage(data);
+            }).catch(function (_ref2) {
+                var response = _ref2.response;
+                return _this2.showErrors(response);
             });
+        },
+        edit: function edit(data) {
+            this.$root.$emit('data', data);
+        },
+        setSuccessMessage: function setSuccessMessage(data) {
+            this.products = data.data;
+            this.pageCount = data.meta.last_page;
+        },
+        showErrors: function showErrors(response) {
+            Vue.swal(this.response.data.errors, 'Error', 'error');
         }
     }
 });
@@ -52021,7 +52435,17 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.products, function(product) {
         return _c("ul", { key: product.id, staticClass: "has-text-centered" }, [
-          _c("li", [_vm._v(_vm._s(product.name))])
+          _c(
+            "li",
+            {
+              on: {
+                click: function($event) {
+                  _vm.edit(product)
+                }
+              }
+            },
+            [_vm._v(_vm._s(product.name))]
+          )
         ])
       }),
       _vm._v(" "),
