@@ -52584,18 +52584,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             errors: [],
+            selects: [{
+                label: 'Product'
+            }],
             order: {
-                product: null,
+                product: [],
                 price: null,
                 quantity: null
             },
-            products: [],
-            submitClick: true
+            products: []
         };
     },
     created: function created() {
@@ -52606,17 +52611,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getProducts: function getProducts() {
             var _this = this;
 
+            var products = void 0;
             axios.get('api/product/show').then(function (data) {
-                var products = data.data.data;
+                products = data.data.data;
                 for (var prod in products) {
                     _this.products.push(products[prod]);
                 }
             }).catch(function (errors) {
-                Vue.swal('Something went wrong with product', 'Erro!', 'error');
+                Vue.swal('Something went wrong with product', 'Error!', 'error');
             });
         },
-        onSubmit: function onSubmit() {
-            axios.post();
+        addSelect: function addSelect(e) {
+            var orderProduct = this.order.product;
+            this.selects.push(this.products);
         }
     }
 });
@@ -52630,56 +52637,70 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "box" }, [
-    _c("form", { on: { submit: _vm.onSubmit } }, [
+    _c("form", [
       _c("div", { staticClass: "columns is-mobile" }, [
-        _c("div", { staticClass: "column" }, [
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label", attrs: { for: "product" } }, [
-              _vm._v("Product")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "select" }, [
-              _c(
-                "select",
-                {
-                  directives: [
+        _c(
+          "div",
+          { staticClass: "column" },
+          _vm._l(_vm.selects, function(select, key) {
+            return _c("div", { key: key, staticClass: "field" }, [
+              _c("label", { staticClass: "label", attrs: { for: "product" } }, [
+                _vm._v(_vm._s(select.label))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "selects" }, [
+                _c("div", { staticClass: "select" }, [
+                  _c(
+                    "select",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.order.product,
-                      expression: "order.product"
-                    }
-                  ],
-                  attrs: { id: "product" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.order,
-                        "product",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                _vm._l(_vm.products, function(product) {
-                  return _c("option", { key: product.id }, [
-                    _vm._v(_vm._s(product.name))
-                  ])
-                })
-              )
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.order.product[key],
+                          expression: "order.product[key]"
+                        }
+                      ],
+                      attrs: { id: "product" },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.order.product,
+                              key,
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
+                          _vm.addSelect
+                        ]
+                      }
+                    },
+                    [
+                      _c("option", { domProps: { value: undefined } }),
+                      _vm._v(" "),
+                      _vm._l(_vm.products, function(product) {
+                        return _c("option", { key: product.id }, [
+                          _vm._v(_vm._s(product.name))
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
             ])
-          ])
-        ]),
+          })
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "column" }, [
           _c("div", { staticClass: "field" }, [
