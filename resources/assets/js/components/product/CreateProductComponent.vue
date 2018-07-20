@@ -59,7 +59,7 @@
          <div class="field is-grouped ">
             <div class="control">
                <button type="submit" class="button is-primary is-rounded">Save</button>
-               <a v-on:click="onDelete(product.id)" class="button is-danger is-rounded">Delete</a>
+               <a v-on:click.prevent="onDelete(product.id)" class="button is-danger is-rounded">Delete</a>
             </div>
          </div>
       </form>
@@ -221,7 +221,7 @@
                      confirmButtonText: 'Yes, delete it!'
                    }).then((result) => {
                      if (result.value) {
-                       axios.post('api/product/' + id)
+                       axios.post('api/product/delete/' + id)
                            .then(({data}) => this.setDeleteSuccessMessage(data))
                            .catch(({response}) => this.setDeleteErrors(response));
                      }
