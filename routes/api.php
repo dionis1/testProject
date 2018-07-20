@@ -21,3 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::any('product', 'ProductController@store');
 
 Route::any('product/show', 'ProductController@show');
+
+Route::any('product/{id}', 'ProductController@update');
+
+Route::any('product/{id}', 'ProductController@delete');
