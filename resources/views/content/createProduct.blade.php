@@ -7,7 +7,7 @@
    <div class="container is-fluid">
       <h1 class="title">Create Product</h1>
       <hr class="title-underline">
-      <div class="columns is-mobile is-4">
+      <div class="columns is-4">
           
           <create-product-component></create-product-component>
           

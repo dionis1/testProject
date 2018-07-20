@@ -52159,7 +52159,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -52170,7 +52169,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 price: null,
                 quantity: null
             },
-            products: []
+            products: [],
+            submitClick: true
         };
     },
     created: function created() {
@@ -52186,8 +52186,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 for (var prod in products) {
                     _this.products.push(products[prod]);
                 }
+            }).catch(function (errors) {
+                Vue.swal('Something went wrong with product', 'Erro!', 'error');
             });
-        }
+        },
+        onSubmit: function onSubmit() {}
     }
 });
 
@@ -52200,7 +52203,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "box" }, [
-    _c("form", [
+    _c("form", { on: { submit: _vm.onSubmit } }, [
       _c("div", { staticClass: "columns is-mobile" }, [
         _c("div", { staticClass: "column" }, [
           _c("div", { staticClass: "field" }, [

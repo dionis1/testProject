@@ -1,7 +1,7 @@
 <template>
   
     <div class="box">
-        <form>
+        <form v-on:submit="onSubmit">
 
         <div class="columns is-mobile">
            <!-- Qetu eshte Problem duhet me bah ajax call sa here te ndryshon me VueJS -->
@@ -9,8 +9,7 @@
                 <div class="field">
                     <label class="label" for="product">Product</label>
                     <div class="select">
-                      <select id="product" v-model="order.product" >
-                        
+                      <select id="product" v-model="order.product">                        
                         <option v-for="product in products" :key="product.id">{{product.name}}</option>
                       </select>
                     </div>
@@ -56,7 +55,8 @@
                     price: null,
                     quantity: null,
                 },
-                products: []
+                products: [],
+                submitClick: true
             }
         },
         created()  {
@@ -71,6 +71,16 @@
                         this.products.push(products[prod]);
                     }
                 })
+                .catch(errors => {
+                    Vue.swal(
+                    'Something went wrong with product',
+                    'Erro!',
+                    'error'
+                    );
+                })
+            },
+            onSubmit() {
+
             }
         }   
     }

@@ -11526,6 +11526,10 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.section {
+  min-height: calc(100vh - 92px);
+}
+
 .title {
   text-align: center;
   font-size: 3rem !important;
@@ -11612,6 +11616,12 @@ input[type=number]::-webkit-outer-spin-button {
 .pagination-next,
 .pagination-previous {
   width: 100px !important;
+}
+
+.pagination a {
+  display: block;
+  padding: 0px 10px;
+  border: 1px solid grey;
 }
 
 @media (min-width: 769px) {
