@@ -1,17 +1,20 @@
 <template>
   
     <div class="box">
-        <form v-on:submit="onSubmit">
+        <form>
 
         <div class="columns is-mobile">
            <!-- Qetu eshte Problem duhet me bah ajax call sa here te ndryshon me VueJS -->
             <div class="column">
-                <div class="field">
-                    <label class="label" for="product">Product</label>
-                    <div class="select">
-                      <select id="product" v-model="order.product">                        
-                        <option v-for="product in products" :key="product.id">{{product.name}}</option>
-                      </select>
+                <div class="field" v-for="(select, key) in selects" v-on:click="play(select,$event)" :key="key">
+                    <label class="label" for="product">{{ select.label }}</label>
+                    <div class="selects">
+                        <div class="select">
+                        <select id="product" v-model="order.product" v-on:change="addSelect">
+                            <option :value="undefined"></option>
+                            <option v-for="product in products" :key="product.id">{{product.name}}</option>
+                        </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,13 +53,15 @@
        data() {
             return {
                 errors: [],
+                selects: [{
+                    label: 'Product'
+                }],
                 order: {
-                    product: null,
+                    product: [],
                     price: null,
-                    quantity: null,
+                    quantity: null
                 },
                 products: [],
-                submitClick: true
             }
         },
         created()  {
@@ -64,24 +69,27 @@
         },
         methods: {
             getProducts(){
+                let products;
                 axios.get('api/product/show')
                 .then(data => {
-                    const products = data.data.data;
+                    products = data.data.data
                     for(var prod in products) {
                         this.products.push(products[prod]);
                     }
+                              
                 })
                 .catch(errors => {
                     Vue.swal(
                     'Something went wrong with product',
-                    'Erro!',
+                    'Error!',
                     'error'
                     );
-                })
+                });                
             },
-            onSubmit() {
-                axios.post()
-            }
+            addSelect(e) {
+                let orderProduct = this.order.product;
+                this.selects.push(this.products);
+            },
         }   
     }
 </script>
