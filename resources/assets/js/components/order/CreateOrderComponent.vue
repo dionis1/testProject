@@ -10,13 +10,17 @@
                     <label class="label" for="product">{{ select.label }}</label>
                     <div class="selects">
                         <div class="select">
-                        <select id="product" v-model="order.product[key]" v-on:change="addSelect">
+                        <select id="product" v-model="order.product[key]">
                             <option :value="undefined"></option>
                             <option v-for="product in products" :key="product.id">{{product.name}}</option>
                         </select>
                         </div>
                     </div>
                 </div>
+            <div class="tags has-addons is-block">
+                <span class="btn tag" v-on:click="addSelect" ><i class="fas fa-plus"></i></span>
+                <span class="btn tag is-info" v-on:click="deleteSelect" ><i class="far fa-trash-alt"></i></span>
+            </div>
             </div>
             <!-- deri qetu vjen -->
             <div class="column">
@@ -40,7 +44,7 @@
         </div>
         <div class="field is-grouped ">
          <div class="control level-right">
-          <button type="submit" class="button is-success level-item">Save</button>
+          <button type="submit" class="button is-primary is-rounded">Save</button>
          </div>
         </div>
         </form>
@@ -90,6 +94,12 @@
                 let orderProduct = this.order.product;
                 this.selects.push(this.products);
             },
+            deleteSelect() {
+                console.log(this.selects.length != 1);
+                if(this.selects.length != 1) {
+                    this.selects.pop();
+                }
+            }
         }   
     }
 </script>

@@ -11629,6 +11629,15 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: bolder;
 }
 
+.pagination .disabled {
+  color: #4a4a4a85 !important;
+  cursor: no-drop !important;
+}
+
+.column:not(:last-child) {
+  position: relative;
+}
+
 @media (min-width: 769px) {
   .column:not(:last-child) {
     margin-right: 0.8rem;
@@ -11667,5 +11676,23 @@ input[type=number]::-webkit-outer-spin-button {
         -ms-flex-pack: center !important;
             justify-content: center !important;
   }
+}
+
+.is-one-quarter > ul li {
+  cursor: pointer;
+}
+
+.field {
+  position: relative;
+}
+
+.column {
+  position: relative;
+}
+
+.tags {
+  position: absolute;
+  bottom: -10px;
+  left: 10px;
 }
 

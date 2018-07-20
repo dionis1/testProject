@@ -52586,6 +52586,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -52623,6 +52627,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addSelect: function addSelect(e) {
             var orderProduct = this.order.product;
             this.selects.push(this.products);
+        },
+        deleteSelect: function deleteSelect() {
+            console.log(this.selects.length != 1);
+            if (this.selects.length != 1) {
+                this.selects.pop();
+            }
         }
     }
 });
@@ -52641,29 +52651,31 @@ var render = function() {
         _c(
           "div",
           { staticClass: "column" },
-          _vm._l(_vm.selects, function(select, key) {
-            return _c("div", { key: key, staticClass: "field" }, [
-              _c("label", { staticClass: "label", attrs: { for: "product" } }, [
-                _vm._v(_vm._s(select.label))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "selects" }, [
-                _c("div", { staticClass: "select" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.order.product[key],
-                          expression: "order.product[key]"
-                        }
-                      ],
-                      attrs: { id: "product" },
-                      on: {
-                        change: [
-                          function($event) {
+          [
+            _vm._l(_vm.selects, function(select, key) {
+              return _c("div", { key: key, staticClass: "field" }, [
+                _c(
+                  "label",
+                  { staticClass: "label", attrs: { for: "product" } },
+                  [_vm._v(_vm._s(select.label))]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "selects" }, [
+                  _c("div", { staticClass: "select" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.order.product[key],
+                            expression: "order.product[key]"
+                          }
+                        ],
+                        attrs: { id: "product" },
+                        on: {
+                          change: function($event) {
                             var $$selectedVal = Array.prototype.filter
                               .call($event.target.options, function(o) {
                                 return o.selected
@@ -52679,26 +52691,43 @@ var render = function() {
                                 ? $$selectedVal
                                 : $$selectedVal[0]
                             )
-                          },
-                          _vm.addSelect
-                        ]
-                      }
-                    },
-                    [
-                      _c("option", { domProps: { value: undefined } }),
-                      _vm._v(" "),
-                      _vm._l(_vm.products, function(product) {
-                        return _c("option", { key: product.id }, [
-                          _vm._v(_vm._s(product.name))
-                        ])
-                      })
-                    ],
-                    2
-                  )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { domProps: { value: undefined } }),
+                        _vm._v(" "),
+                        _vm._l(_vm.products, function(product) {
+                          return _c("option", { key: product.id }, [
+                            _vm._v(_vm._s(product.name))
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ])
                 ])
               ])
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "tags has-addons is-block" }, [
+              _c(
+                "span",
+                { staticClass: "btn tag", on: { click: _vm.addSelect } },
+                [_c("i", { staticClass: "fas fa-plus" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "btn tag is-info",
+                  on: { click: _vm.deleteSelect }
+                },
+                [_c("i", { staticClass: "far fa-trash-alt" })]
+              )
             ])
-          })
+          ],
+          2
         ),
         _vm._v(" "),
         _c("div", { staticClass: "column" }, [
@@ -52790,7 +52819,7 @@ var staticRenderFns = [
         _c(
           "button",
           {
-            staticClass: "button is-success level-item",
+            staticClass: "button is-primary is-rounded",
             attrs: { type: "submit" }
           },
           [_vm._v("Save")]
