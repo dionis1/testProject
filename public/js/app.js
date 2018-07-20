@@ -52642,76 +52642,62 @@ var render = function() {
           "div",
           { staticClass: "column" },
           _vm._l(_vm.selects, function(select, key) {
-            return _c(
-              "div",
-              {
-                key: key,
-                staticClass: "field",
-                on: {
-                  click: function($event) {
-                    _vm.play(select, $event)
-                  }
-                }
-              },
-              [
-                _c(
-                  "label",
-                  { staticClass: "label", attrs: { for: "product" } },
-                  [_vm._v(_vm._s(select.label))]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "selects" }, [
-                  _c("div", { staticClass: "select" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.order.product,
-                            expression: "order.product"
-                          }
-                        ],
-                        attrs: { id: "product" },
-                        on: {
-                          change: [
-                            function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.order,
-                                "product",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            },
-                            _vm.addSelect
-                          ]
+            return _c("div", { key: key, staticClass: "field" }, [
+              _c("label", { staticClass: "label", attrs: { for: "product" } }, [
+                _vm._v(_vm._s(select.label))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "selects" }, [
+                _c("div", { staticClass: "select" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.order.product[key],
+                          expression: "order.product[key]"
                         }
-                      },
-                      [
-                        _c("option", { domProps: { value: undefined } }),
-                        _vm._v(" "),
-                        _vm._l(_vm.products, function(product) {
-                          return _c("option", { key: product.id }, [
-                            _vm._v(_vm._s(product.name))
-                          ])
-                        })
                       ],
-                      2
-                    )
-                  ])
+                      attrs: { id: "product" },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.order.product,
+                              key,
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
+                          _vm.addSelect
+                        ]
+                      }
+                    },
+                    [
+                      _c("option", { domProps: { value: undefined } }),
+                      _vm._v(" "),
+                      _vm._l(_vm.products, function(product) {
+                        return _c("option", { key: product.id }, [
+                          _vm._v(_vm._s(product.name))
+                        ])
+                      })
+                    ],
+                    2
+                  )
                 ])
-              ]
-            )
+              ])
+            ])
           })
         ),
         _vm._v(" "),

@@ -6,11 +6,11 @@
         <div class="columns is-mobile">
            <!-- Qetu eshte Problem duhet me bah ajax call sa here te ndryshon me VueJS -->
             <div class="column">
-                <div class="field" v-for="(select, key) in selects" v-on:click="play(select,$event)" :key="key">
+                <div class="field" v-for="(select, key) in selects" :key="key">
                     <label class="label" for="product">{{ select.label }}</label>
                     <div class="selects">
                         <div class="select">
-                        <select id="product" v-model="order.product" v-on:change="addSelect">
+                        <select id="product" v-model="order.product[key]" v-on:change="addSelect">
                             <option :value="undefined"></option>
                             <option v-for="product in products" :key="product.id">{{product.name}}</option>
                         </select>
