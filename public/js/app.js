@@ -52190,7 +52190,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 Vue.swal('Something went wrong with product', 'Erro!', 'error');
             });
         },
-        onSubmit: function onSubmit() {}
+        onSubmit: function onSubmit() {
+            axios.post();
+        }
     }
 });
 

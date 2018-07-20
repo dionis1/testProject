@@ -11621,7 +11621,12 @@ input[type=number]::-webkit-outer-spin-button {
 .pagination a {
   display: block;
   padding: 0px 10px;
+  line-height: 20px;
   border: 1px solid grey;
+}
+
+.pagination .active {
+  font-weight: bolder;
 }
 
 @media (min-width: 769px) {
