@@ -11644,6 +11644,10 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
+.column {
+  clear: both;
+}
+
 .tile {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -11682,6 +11686,11 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
+.flex-wrap {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 .tags {
   margin-left: 5px;
 }
@@ -11700,5 +11709,19 @@ input[type=number]::-webkit-outer-spin-button {
 
 .tags i {
   color: white;
+}
+
+.selects {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
 }
 

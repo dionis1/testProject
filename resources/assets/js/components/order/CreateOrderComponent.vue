@@ -3,28 +3,28 @@
     <div class="box">
         <form>
 
-        <div class="columns is-mobile">
-           <!-- Qetu eshte Problem duhet me bah ajax call sa here te ndryshon me VueJS -->
+        <div class="columns">
             <div class="column">
                 <div class="field" >
-                    <div class="is-flex">
+                    <div class="is-flex flex-wrap">
                         <label class="label" for="product">Products</label>
                         <div class="tags has-addons is-block">
                             <span class="btn tag" v-on:click="addSelect" ><i class="fas fa-plus"></i></span>
                             <span class="btn tag is-info" v-on:click="deleteSelect" ><i class="far fa-trash-alt"></i></span>
                         </div>
                     </div>
-                    <div class="selects" v-for="(select, key) in selects" :key="key">
-                        <div class="select">
-                        <select id="product" v-model="order.product[key]">
-                            <option :value="undefined"></option>
-                            <option v-for="product in products" :key="product.id">{{product.name}}</option>
-                        </select>
+                    <div class="select-aligned" v-for="(select, key) in selects" :key="key">
+                        <div class="selects" >
+                            <div class="select">
+                                <select id="product" v-model="order.product[key]">
+                                    <option :value="undefined"></option>
+                                    <option v-for="product in products" :key="product.id">{{product.name}}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- deri qetu vjen -->
             <div class="column">
                 <div class="field">
                 <label class="label" for="price"> Product Price</label>
@@ -50,8 +50,7 @@
          </div>
         </div>
         </form>
-     </div>
-   
+    </div>
 </template>
 
 <script>

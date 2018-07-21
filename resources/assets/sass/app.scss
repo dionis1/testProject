@@ -106,6 +106,10 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
+.column {
+    clear: both;
+}
+
 .tile {
     justify-content: center;
 }
@@ -140,21 +144,16 @@ input[type=number]::-webkit-outer-spin-button {
     cursor: pointer;
 }
 
-.field {
-    // position: relative;
+.flex-wrap {
+    flex-wrap: wrap;
 }
 
-.column {
-    // position: relative;
-}
 
 .tags {
     margin-left: 5px;
 
     .tag:not(body) {
-        // background-color: #ff3860;
         background-color: #00d1b2;
-
     }
 
     .tag:not(body).is-info {
@@ -169,3 +168,14 @@ input[type=number]::-webkit-outer-spin-button {
         color: white;
     }
 }
+
+.selects {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: start;
+}
+
+// .select-aligned .select:not(first-child) {
+//     margin-top: 4px!important;
+// }

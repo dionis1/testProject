@@ -52592,7 +52592,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -52649,13 +52648,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "box" }, [
     _c("form", [
-      _c("div", { staticClass: "columns is-mobile" }, [
+      _c("div", { staticClass: "columns" }, [
         _c("div", { staticClass: "column" }, [
           _c(
             "div",
             { staticClass: "field" },
             [
-              _c("div", { staticClass: "is-flex" }, [
+              _c("div", { staticClass: "is-flex flex-wrap" }, [
                 _c(
                   "label",
                   { staticClass: "label", attrs: { for: "product" } },
@@ -52681,51 +52680,53 @@ var render = function() {
               ]),
               _vm._v(" "),
               _vm._l(_vm.selects, function(select, key) {
-                return _c("div", { key: key, staticClass: "selects" }, [
-                  _c("div", { staticClass: "select" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.order.product[key],
-                            expression: "order.product[key]"
+                return _c("div", { key: key, staticClass: "select-aligned" }, [
+                  _c("div", { staticClass: "selects" }, [
+                    _c("div", { staticClass: "select" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.order.product[key],
+                              expression: "order.product[key]"
+                            }
+                          ],
+                          attrs: { id: "product" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.order.product,
+                                key,
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
                           }
+                        },
+                        [
+                          _c("option", { domProps: { value: undefined } }),
+                          _vm._v(" "),
+                          _vm._l(_vm.products, function(product) {
+                            return _c("option", { key: product.id }, [
+                              _vm._v(_vm._s(product.name))
+                            ])
+                          })
                         ],
-                        attrs: { id: "product" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.order.product,
-                              key,
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { domProps: { value: undefined } }),
-                        _vm._v(" "),
-                        _vm._l(_vm.products, function(product) {
-                          return _c("option", { key: product.id }, [
-                            _vm._v(_vm._s(product.name))
-                          ])
-                        })
-                      ],
-                      2
-                    )
+                        2
+                      )
+                    ])
                   ])
                 ])
               })
