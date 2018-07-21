@@ -11682,17 +11682,23 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
-.field {
-  position: relative;
-}
-
-.column {
-  position: relative;
-}
-
 .tags {
-  position: absolute;
-  bottom: -10px;
-  left: 10px;
+  margin-left: 5px;
+}
+
+.tags .tag:not(body) {
+  background-color: #00d1b2;
+}
+
+.tags .tag:not(body).is-info {
+  background-color: #ff3860;
+}
+
+.tags.has-addons .tag {
+  margin-right: -4px !important;
+}
+
+.tags i {
+  color: white;
 }
 

@@ -6,9 +6,15 @@
         <div class="columns is-mobile">
            <!-- Qetu eshte Problem duhet me bah ajax call sa here te ndryshon me VueJS -->
             <div class="column">
-                <div class="field" v-for="(select, key) in selects" :key="key">
-                    <label class="label" for="product">{{ select.label }}</label>
-                    <div class="selects">
+                <div class="field" >
+                    <div class="is-flex">
+                        <label class="label" for="product">Products</label>
+                        <div class="tags has-addons is-block">
+                            <span class="btn tag" v-on:click="addSelect" ><i class="fas fa-plus"></i></span>
+                            <span class="btn tag is-info" v-on:click="deleteSelect" ><i class="far fa-trash-alt"></i></span>
+                        </div>
+                    </div>
+                    <div class="selects" v-for="(select, key) in selects" :key="key">
                         <div class="select">
                         <select id="product" v-model="order.product[key]">
                             <option :value="undefined"></option>
@@ -17,10 +23,6 @@
                         </div>
                     </div>
                 </div>
-            <div class="tags has-addons is-block">
-                <span class="btn tag" v-on:click="addSelect" ><i class="fas fa-plus"></i></span>
-                <span class="btn tag is-info" v-on:click="deleteSelect" ><i class="far fa-trash-alt"></i></span>
-            </div>
             </div>
             <!-- deri qetu vjen -->
             <div class="column">
@@ -95,7 +97,6 @@
                 this.selects.push(this.products);
             },
             deleteSelect() {
-                console.log(this.selects.length != 1);
                 if(this.selects.length != 1) {
                     this.selects.pop();
                 }

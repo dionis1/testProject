@@ -52590,6 +52590,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -52629,7 +52631,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.selects.push(this.products);
         },
         deleteSelect: function deleteSelect() {
-            console.log(this.selects.length != 1);
             if (this.selects.length != 1) {
                 this.selects.pop();
             }
@@ -52648,19 +52649,38 @@ var render = function() {
   return _c("div", { staticClass: "box" }, [
     _c("form", [
       _c("div", { staticClass: "columns is-mobile" }, [
-        _c(
-          "div",
-          { staticClass: "column" },
-          [
-            _vm._l(_vm.selects, function(select, key) {
-              return _c("div", { key: key, staticClass: "field" }, [
+        _c("div", { staticClass: "column" }, [
+          _c(
+            "div",
+            { staticClass: "field" },
+            [
+              _c("div", { staticClass: "is-flex" }, [
                 _c(
                   "label",
                   { staticClass: "label", attrs: { for: "product" } },
-                  [_vm._v(_vm._s(select.label))]
+                  [_vm._v("Products")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "selects" }, [
+                _c("div", { staticClass: "tags has-addons is-block" }, [
+                  _c(
+                    "span",
+                    { staticClass: "btn tag", on: { click: _vm.addSelect } },
+                    [_c("i", { staticClass: "fas fa-plus" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "btn tag is-info",
+                      on: { click: _vm.deleteSelect }
+                    },
+                    [_c("i", { staticClass: "far fa-trash-alt" })]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.selects, function(select, key) {
+                return _c("div", { key: key, staticClass: "selects" }, [
                   _c("div", { staticClass: "select" }, [
                     _c(
                       "select",
@@ -52707,28 +52727,11 @@ var render = function() {
                     )
                   ])
                 ])
-              ])
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "tags has-addons is-block" }, [
-              _c(
-                "span",
-                { staticClass: "btn tag", on: { click: _vm.addSelect } },
-                [_c("i", { staticClass: "fas fa-plus" })]
-              ),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  staticClass: "btn tag is-info",
-                  on: { click: _vm.deleteSelect }
-                },
-                [_c("i", { staticClass: "far fa-trash-alt" })]
-              )
-            ])
-          ],
-          2
-        ),
+              })
+            ],
+            2
+          )
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "column" }, [
           _c("div", { staticClass: "field" }, [
