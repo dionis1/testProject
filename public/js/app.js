@@ -51746,7 +51746,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 confirmButtonText: 'Yes, delete it!'
             }).then(function (result) {
                 if (result.value) {
-                    axios.post('api/product/' + id).then(function (_ref5) {
+                    axios.post('api/product/delete/' + id).then(function (_ref5) {
                         var data = _ref5.data;
                         return _this4.setDeleteSuccessMessage(data);
                     }).catch(function (_ref6) {
@@ -51969,6 +51969,7 @@ var render = function() {
                     staticClass: "button is-danger is-rounded",
                     on: {
                       click: function($event) {
+                        $event.preventDefault()
                         _vm.onDelete(_vm.product.id)
                       }
                     }

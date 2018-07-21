@@ -24,4 +24,4 @@ Route::any('product/show', 'ProductController@show');
 
 Route::any('product/{id}', 'ProductController@update');
 
-Route::any('product/{id}', 'ProductController@delete');
+Route::any('product/delete/{id}', 'ProductController@delete');
