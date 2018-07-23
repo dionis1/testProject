@@ -1,57 +1,6 @@
 <template>
   
     <div class="box">
-    <!--
-      <form>
-        <div class="columns">
-            <div class="column">
-                <div class="field" >
-                    <div class="is-flex flex-wrap">
-                        <label class="label" for="product">Products</label>
-                        <div class="tags has-addons is-block">
-                            <span class="btn tag" v-on:click="addSelect" ><i class="fas fa-plus"></i></span>
-                            <span class="btn tag is-info" v-on:click="deleteSelect" ><i class="far fa-trash-alt"></i></span>
-                        </div>
-                    </div>
-                    <div class="select-aligned" v-for="(select, key) in selects" :key="key">
-                        <div class="selects" >
-                            <div class="select">
-                                <select id="product" v-model="order.product[key]">
-                                    <option :value="undefined"></option>
-                                    <option v-for="product in products" :key="product.id">{{product.name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="field">
-                <label class="label" for="price"> Product Price</label>
-                    <div class="control">
-                        <input class="input" id="price" v-model="order.price" type="number" placeholder="Product Price">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column">
-                <div class="field">
-                    <label class="label" for="quantity">Quantity</label>
-                    <div class="control">
-                        <input class="input" id="quantity" v-model="order.quantity" type="number" placeholder="Quantity">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="field is-grouped ">
-         <div class="control level-right">
-          <button type="submit" class="button is-primary is-rounded">Save</button>
-         </div>
-        </div>
-      </form>
-    
-    -->
     <div class="column">
     <div class="is-flex flex-wrap">
      <label class="label" for="product">Products Order</label>
@@ -68,8 +17,9 @@
         <div class="field">
          <div class="selects">
           <div class="select">
-           <select class="select-aligned"  :id="key" v-model="product.selects" v-for="productstest in products" @change="addThing($event, productstest)">
-                <option>{{ productstest.name }}</option>
+           <select class="select-aligned"  :id="key" @change="addData(key)" >
+                <option disabled value="" selected="">Please select one</option>
+                <option v-model="product.selects" v-for="productstest in products">{{ productstest.name }}</option>
            </select>
           </div>
          </div>
@@ -79,7 +29,15 @@
          <div class="field">
            <label class="label" for="price"> Product Price</label>
            <div class="control">
-            <input class="input" :id="key" type="number" v-model="product.price[key]">
+            <input class="input" :id="key" type="number" v-model="product.price" readonly>
+           </div>
+         </div>
+       </div>
+       <div class="column">
+         <div class="field">
+           <label class="label" for="quantity_max">MAX Quantity</label>
+           <div class="control">
+            <input class="input"  :id="key" type="number" v-model="product.quantity_max" readonly>
            </div>
          </div>
        </div>
@@ -87,7 +45,7 @@
          <div class="field">
            <label class="label" for="quantity">Quantity</label>
            <div class="control">
-            <input class="input"  :id="key" type="number" v-model="product.quantity">
+            <input class="input"  :id="key" type="number" v-model="product.quantity" @change.prevent="sumPrice(key)">
            </div>
          </div>
        </div>
@@ -101,6 +59,14 @@
        </div>
      </div>
     </div>
+    <div class="column" v-if="create">
+     <div class="field">
+       <label class="label" for="total_price">Total Price</label>
+       <div class="control">
+        <input class="input" type="number" v-model="total_price">
+       </div>
+     </div>
+   </div>
     <div class="field is-grouped " v-if="create">
      <div class="control">
       <button class="button is-primary is-rounded">Create a Order</button>
@@ -114,6 +80,7 @@
        data() {
             return {
                 create: false,
+                total_price: "",
                 errors: [],
                 addProduct: [],
                 products: [],
@@ -151,6 +118,7 @@
                         price: "",
                         quantity: "",
                         final_price: "",
+                        quantity_max: "",
                         
                     });
             },
@@ -162,11 +130,27 @@
                 }
             },
 
-            addThing: function(event, row) 
+            addData: function(key, productstest) 
             {   
-                console.log(key);
+                this.addProduct[key].price = this.products[key].price, 
+                this.addProduct[key].quantity_max = this.products[key].quantity
+                              
+            },
 
-                this.addProduct.price = productstest.price               
+            sumPrice(key) 
+            {   
+              this.addProduct[key].final_price = this.addProduct[key].price * this.addProduct[key].quantity,
+              this.totalPrice();           
+            },
+
+            totalPrice()
+            {   
+                this.total_price = "";
+                var x = this.addProduct.length;
+                var i = 0;
+                 for(i=0; i <= x; i++) {
+                     this.total_price = parseFloat(this.total_price + this.addProduct[i].final_price)
+                 }
             }
 
         }   

@@ -52614,45 +52614,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             create: false,
+            total_price: "",
             errors: [],
             addProduct: [],
             products: []
@@ -52684,7 +52651,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 selects: "",
                 price: "",
                 quantity: "",
-                final_price: ""
+                final_price: "",
+                quantity_max: ""
 
             });
         },
@@ -52695,12 +52663,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
 
-        addThing: function addThing(event, row) {
-            console.log(key);
+        addData: function addData(key, productstest) {
+            this.addProduct[key].price = this.products[key].price, this.addProduct[key].quantity_max = this.products[key].quantity;
+        },
 
-            this.addProduct.price = productstest.price;
+        sumPrice: function sumPrice(key) {
+            this.addProduct[key].final_price = this.addProduct[key].price * this.addProduct[key].quantity, this.totalPrice();
+        },
+        totalPrice: function totalPrice() {
+            this.total_price = "";
+            var x = this.addProduct.length;
+            var i = 0;
+            for (i = 0; i <= x; i++) {
+                this.total_price = parseFloat(this.total_price + this.addProduct[i].final_price);
+            }
         }
-
     }
 });
 
@@ -52747,52 +52724,44 @@ var render = function() {
             _c("div", { staticClass: "column" }, [
               _c("div", { staticClass: "field" }, [
                 _c("div", { staticClass: "selects" }, [
-                  _c(
-                    "div",
-                    { staticClass: "select" },
-                    _vm._l(_vm.products, function(productstest) {
-                      return _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: product.selects,
-                              expression: "product.selects"
-                            }
-                          ],
-                          staticClass: "select-aligned",
-                          attrs: { id: key },
-                          on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  product,
-                                  "selects",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              },
-                              function($event) {
-                                _vm.addThing($event, productstest)
-                              }
-                            ]
+                  _c("div", { staticClass: "select" }, [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "select-aligned",
+                        attrs: { id: key },
+                        on: {
+                          change: function($event) {
+                            _vm.addData(key)
                           }
-                        },
-                        [_c("option", [_vm._v(_vm._s(productstest.name))])]
-                      )
-                    })
-                  )
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { disabled: "", value: "", selected: "" } },
+                          [_vm._v("Please select one")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.products, function(productstest) {
+                          return _c(
+                            "option",
+                            {
+                              model: {
+                                value: product.selects,
+                                callback: function($$v) {
+                                  _vm.$set(product, "selects", $$v)
+                                },
+                                expression: "product.selects"
+                              }
+                            },
+                            [_vm._v(_vm._s(productstest.name))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
                 ])
               ])
             ]),
@@ -52809,19 +52778,53 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: product.price[key],
-                        expression: "product.price[key]"
+                        value: product.price,
+                        expression: "product.price"
                       }
                     ],
                     staticClass: "input",
-                    attrs: { id: key, type: "number" },
-                    domProps: { value: product.price[key] },
+                    attrs: { id: key, type: "number", readonly: "" },
+                    domProps: { value: product.price },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(product.price, key, $event.target.value)
+                        _vm.$set(product, "price", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column" }, [
+              _c("div", { staticClass: "field" }, [
+                _c(
+                  "label",
+                  { staticClass: "label", attrs: { for: "quantity_max" } },
+                  [_vm._v("MAX Quantity")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: product.quantity_max,
+                        expression: "product.quantity_max"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { id: key, type: "number", readonly: "" },
+                    domProps: { value: product.quantity_max },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(product, "quantity_max", $event.target.value)
                       }
                     }
                   })
@@ -52851,6 +52854,10 @@ var render = function() {
                     attrs: { id: key, type: "number" },
                     domProps: { value: product.quantity },
                     on: {
+                      change: function($event) {
+                        $event.preventDefault()
+                        _vm.sumPrice(key)
+                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -52899,6 +52906,42 @@ var render = function() {
           ])
         ])
       }),
+      _vm._v(" "),
+      _vm.create
+        ? _c("div", { staticClass: "column" }, [
+            _c("div", { staticClass: "field" }, [
+              _c(
+                "label",
+                { staticClass: "label", attrs: { for: "total_price" } },
+                [_vm._v("Total Price")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "control" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.total_price,
+                      expression: "total_price"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.total_price },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.total_price = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _vm.create
         ? _c("div", { staticClass: "field is-grouped " }, [_vm._m(0)])
