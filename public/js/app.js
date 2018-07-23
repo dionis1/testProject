@@ -52663,8 +52663,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
 
-        addData: function addData(key, productstest) {
-            this.addProduct[key].price = this.products[key].price, this.addProduct[key].quantity_max = this.products[key].quantity;
+        addData: function addData(key) {
+            this.addProduct[key].price = this.products[this.addProduct[key].selects].price, this.addProduct[key].quantity_max = this.products[key].quantity;
         },
 
         sumPrice: function sumPrice(key) {
@@ -52728,12 +52728,39 @@ var render = function() {
                     _c(
                       "select",
                       {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: product.selects,
+                            expression: "product.selects"
+                          }
+                        ],
                         staticClass: "select-aligned",
                         attrs: { id: key },
                         on: {
-                          change: function($event) {
-                            _vm.addData(key)
-                          }
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                product,
+                                "selects",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            function($event) {
+                              _vm.addData(key)
+                            }
+                          ]
                         }
                       },
                       [
@@ -52743,18 +52770,10 @@ var render = function() {
                           [_vm._v("Please select one")]
                         ),
                         _vm._v(" "),
-                        _vm._l(_vm.products, function(productstest) {
+                        _vm._l(_vm.products, function(productstest, key) {
                           return _c(
                             "option",
-                            {
-                              model: {
-                                value: product.selects,
-                                callback: function($$v) {
-                                  _vm.$set(product, "selects", $$v)
-                                },
-                                expression: "product.selects"
-                              }
-                            },
+                            { domProps: { value: productstest.key } },
                             [_vm._v(_vm._s(productstest.name))]
                           )
                         })

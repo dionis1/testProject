@@ -17,9 +17,9 @@
         <div class="field">
          <div class="selects">
           <div class="select">
-           <select class="select-aligned"  :id="key" @change="addData(key)" >
+           <select class="select-aligned"  v-model="product.selects" :id="key" @change="addData(key)" >
                 <option disabled value="" selected="">Please select one</option>
-                <option v-model="product.selects" v-for="productstest in products">{{ productstest.name }}</option>
+                <option v-for="(productstest, key) in products" v-bind:value="productstest.key">{{ productstest.name }}</option>
            </select>
           </div>
          </div>
@@ -130,9 +130,9 @@
                 }
             },
 
-            addData: function(key, productstest) 
+            addData: function(key) 
             {   
-                this.addProduct[key].price = this.products[key].price, 
+                this.addProduct[key].price = this.products[this.addProduct[key].selects].price, 
                 this.addProduct[key].quantity_max = this.products[key].quantity
                               
             },
