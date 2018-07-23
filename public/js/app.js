@@ -52592,19 +52592,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             errors: [],
-            selects: [{
-                label: 'Product'
-            }],
-            order: {
-                product: [],
-                price: null,
-                quantity: null
-            },
+            addProduct: [],
             products: []
         };
     },
@@ -52626,14 +52670,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 Vue.swal('Something went wrong with product', 'Error!', 'error');
             });
         },
-        addSelect: function addSelect(e) {
-            var orderProduct = this.order.product;
-            this.selects.push(this.products);
+
+
+        addProducts: function addProducts() {
+            this.addProduct.push({
+                selects: "",
+                price: "",
+                quantity: "",
+                final_price: ""
+
+            });
         },
         deleteSelect: function deleteSelect() {
-            if (this.selects.length != 1) {
-                this.selects.pop();
+            if (this.addProduct.length != 1) {
+                this.addProduct.pop();
             }
+        },
+        addThing: function addThing(productstest, key) {
+            console.log(key);
+
+            this.addProduct.price = productstest.price;
         }
     }
 });
@@ -52646,193 +52702,198 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "box" }, [
-    _c("form", [
-      _c("div", { staticClass: "columns" }, [
-        _c("div", { staticClass: "column" }, [
-          _c(
-            "div",
-            { staticClass: "field" },
-            [
-              _c("div", { staticClass: "is-flex flex-wrap" }, [
-                _c(
-                  "label",
-                  { staticClass: "label", attrs: { for: "product" } },
-                  [_vm._v("Products")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "tags has-addons is-block" }, [
+  return _c(
+    "div",
+    { staticClass: "box" },
+    [
+      _c("div", { staticClass: "column" }, [
+        _c("div", { staticClass: "is-flex flex-wrap" }, [
+          _c("label", { staticClass: "label", attrs: { for: "product" } }, [
+            _vm._v("Products Order")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "tags has-addons is-block" }, [
+            _c(
+              "span",
+              { staticClass: "btn tag", on: { click: _vm.addProducts } },
+              [_c("i", { staticClass: "fas fa-plus" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "btn tag is-info",
+                on: { click: _vm.deleteSelect }
+              },
+              [_c("i", { staticClass: "far fa-trash-alt" })]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.addProduct, function(product, key) {
+        return _c("div", [
+          _c("div", { staticClass: "columns" }, [
+            _c("div", { staticClass: "column" }, [
+              _c("div", { staticClass: "field" }, [
+                _c("div", { staticClass: "selects" }, [
                   _c(
-                    "span",
-                    { staticClass: "btn tag", on: { click: _vm.addSelect } },
-                    [_c("i", { staticClass: "fas fa-plus" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      staticClass: "btn tag is-info",
-                      on: { click: _vm.deleteSelect }
-                    },
-                    [_c("i", { staticClass: "far fa-trash-alt" })]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.selects, function(select, key) {
-                return _c("div", { key: key, staticClass: "select-aligned" }, [
-                  _c("div", { staticClass: "selects" }, [
-                    _c("div", { staticClass: "select" }, [
-                      _c(
+                    "div",
+                    { staticClass: "select" },
+                    _vm._l(_vm.products, function(productstest) {
+                      return _c(
                         "select",
                         {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.order.product[key],
-                              expression: "order.product[key]"
+                              value: product.selects,
+                              expression: "product.selects"
                             }
                           ],
-                          attrs: { id: "product" },
+                          staticClass: "select-aligned",
+                          attrs: { id: key },
                           on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.order.product,
-                                key,
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  product,
+                                  "selects",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              function($event) {
+                                _vm.addThing($event, productstest)
+                              }
+                            ]
                           }
                         },
-                        [
-                          _c("option", { domProps: { value: undefined } }),
-                          _vm._v(" "),
-                          _vm._l(_vm.products, function(product) {
-                            return _c("option", { key: product.id }, [
-                              _vm._v(_vm._s(product.name))
-                            ])
-                          })
-                        ],
-                        2
+                        [_c("option", [_vm._v(_vm._s(productstest.name))])]
                       )
-                    ])
-                  ])
+                    })
+                  )
                 ])
-              })
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "column" }, [
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label", attrs: { for: "price" } }, [
-              _vm._v(" Product Price")
+              ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "control" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.order.price,
-                    expression: "order.price"
-                  }
-                ],
-                staticClass: "input",
-                attrs: {
-                  id: "price",
-                  type: "number",
-                  placeholder: "Product Price"
-                },
-                domProps: { value: _vm.order.price },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _c("div", { staticClass: "column" }, [
+              _c("div", { staticClass: "field" }, [
+                _c("label", { staticClass: "label", attrs: { for: "price" } }, [
+                  _vm._v(" Product Price")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: product.price[key],
+                        expression: "product.price[key]"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { id: key, type: "number" },
+                    domProps: { value: product.price[key] },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(product.price, key, $event.target.value)
+                      }
                     }
-                    _vm.$set(_vm.order, "price", $event.target.value)
-                  }
-                }
-              })
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column" }, [
+              _c("div", { staticClass: "field" }, [
+                _c(
+                  "label",
+                  { staticClass: "label", attrs: { for: "quantity" } },
+                  [_vm._v("Quantity")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: product.quantity,
+                        expression: "product.quantity"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { id: key, type: "number" },
+                    domProps: { value: product.quantity },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(product, "quantity", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column" }, [
+              _c("div", { staticClass: "field" }, [
+                _c(
+                  "label",
+                  { staticClass: "label", attrs: { for: "final_price" } },
+                  [_vm._v("Final Price")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: product.final_price,
+                        expression: "product.final_price"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { id: key, type: "number" },
+                    domProps: { value: product.final_price },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(product, "final_price", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
             ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "columns" }, [
-        _c("div", { staticClass: "column" }, [
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label", attrs: { for: "quantity" } }, [
-              _vm._v("Quantity")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "control" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.order.quantity,
-                    expression: "order.quantity"
-                  }
-                ],
-                staticClass: "input",
-                attrs: {
-                  id: "quantity",
-                  type: "number",
-                  placeholder: "Quantity"
-                },
-                domProps: { value: _vm.order.quantity },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.order, "quantity", $event.target.value)
-                  }
-                }
-              })
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._m(0)
-    ])
-  ])
+      })
+    ],
+    2
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field is-grouped " }, [
-      _c("div", { staticClass: "control level-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "button is-primary is-rounded",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Save")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
