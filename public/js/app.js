@@ -52664,7 +52664,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
         addData: function addData(key) {
-            this.addProduct[key].price = this.products[this.addProduct[key].selects].price, this.addProduct[key].quantity_max = this.products[key].quantity;
+            var id = this.addProduct[key].selects;
+            this.addProduct[key].price = this.products[id].price, this.addProduct[key].quantity_max = this.products[id].quantity;
         },
 
         sumPrice: function sumPrice(key) {
@@ -52771,11 +52772,9 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _vm._l(_vm.products, function(productstest, key) {
-                          return _c(
-                            "option",
-                            { domProps: { value: productstest.key } },
-                            [_vm._v(_vm._s(productstest.name))]
-                          )
+                          return _c("option", { domProps: { value: key } }, [
+                            _vm._v(_vm._s(productstest.name))
+                          ])
                         })
                       ],
                       2

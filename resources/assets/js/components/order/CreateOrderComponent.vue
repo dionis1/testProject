@@ -19,7 +19,7 @@
           <div class="select">
            <select class="select-aligned"  v-model="product.selects" :id="key" @change="addData(key)" >
                 <option disabled value="" selected="">Please select one</option>
-                <option v-for="(productstest, key) in products" v-bind:value="productstest.key">{{ productstest.name }}</option>
+                <option v-for="(productstest, key) in products" :value="key">{{ productstest.name }}</option>
            </select>
           </div>
          </div>
@@ -132,8 +132,9 @@
 
             addData: function(key) 
             {   
-                this.addProduct[key].price = this.products[this.addProduct[key].selects].price, 
-                this.addProduct[key].quantity_max = this.products[key].quantity
+                var id = this.addProduct[key].selects;
+                this.addProduct[key].price = this.products[id].price, 
+                this.addProduct[key].quantity_max = this.products[id].quantity
                               
             },
 
