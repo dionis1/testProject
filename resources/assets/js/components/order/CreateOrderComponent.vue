@@ -10,7 +10,6 @@
      </div>
     </div>
     </div>
-     
      <div v-for="(product, key) in addProduct">
        <div class="columns">
        <div class="column">
@@ -45,7 +44,7 @@
          <div class="field">
            <label class="label" for="quantity">Quantity</label>
            <div class="control">
-            <input class="input"  :id="key" type="number" v-model="product.quantity" @change.prevent="sumPrice(key)">
+            <input class="input"  :id="key" type="number" v-model="product.quantity" @change.prevent="sumPrice(key)" min="1">
            </div>
          </div>
        </div>
@@ -127,6 +126,7 @@
                 if(this.addProduct.length != 1) 
                 {
                     this.addProduct.pop();
+                    this.totalPrice();
                 }
             },
 

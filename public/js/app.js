@@ -52613,7 +52613,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -52659,6 +52658,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteSelect: function deleteSelect() {
             if (this.addProduct.length != 1) {
                 this.addProduct.pop();
+                this.totalPrice();
             }
         },
 
@@ -52869,7 +52869,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "input",
-                    attrs: { id: key, type: "number" },
+                    attrs: { id: key, type: "number", min: "1" },
                     domProps: { value: product.quantity },
                     on: {
                       change: function($event) {
