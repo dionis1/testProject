@@ -164,10 +164,12 @@
                    .then(({data}) => this.setSuccessMessage(data))
                    .catch(({response}) => this.setErrors(response));
            },
-           setErrors(response) {
+           setErrors(response) 
+           {
                this.errors = this.response.data.errors;
                
            },
+
            setSuccessMessage(data) {
                this.$root.$emit('created', data);
                Vue.swal(

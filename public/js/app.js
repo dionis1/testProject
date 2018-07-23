@@ -52643,10 +52643,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            create: false,
             errors: [],
             addProduct: [],
             products: []
@@ -52673,6 +52679,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
         addProducts: function addProducts() {
+            this.create = true;
             this.addProduct.push({
                 selects: "",
                 price: "",
@@ -52686,11 +52693,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.addProduct.pop();
             }
         },
-        addThing: function addThing(productstest, key) {
+
+
+        addThing: function addThing(event, row) {
             console.log(key);
 
             this.addProduct.price = productstest.price;
         }
+
     }
 });
 
@@ -52888,12 +52898,27 @@ var render = function() {
             ])
           ])
         ])
-      })
+      }),
+      _vm._v(" "),
+      _vm.create
+        ? _c("div", { staticClass: "field is-grouped " }, [_vm._m(0)])
+        : _vm._e()
     ],
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "control" }, [
+      _c("button", { staticClass: "button is-primary is-rounded" }, [
+        _vm._v("Create a Order")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

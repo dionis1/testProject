@@ -101,6 +101,11 @@
        </div>
      </div>
     </div>
+    <div class="field is-grouped " v-if="create">
+     <div class="control">
+      <button class="button is-primary is-rounded">Create a Order</button>
+     </div>
+    </div>
    </div>
 </template>
 
@@ -108,6 +113,7 @@
     export default {
        data() {
             return {
+                create: false,
                 errors: [],
                 addProduct: [],
                 products: [],
@@ -137,7 +143,9 @@
             },
 
 
-            addProducts: function() {
+            addProducts: function()
+            {
+                this.create = true;
                 this.addProduct.push({
                         selects: "",
                         price: "",
@@ -146,13 +154,15 @@
                         
                     });
             },
-            deleteSelect() {
-                if(this.addProduct.length != 1) {
+            deleteSelect() 
+            {
+                if(this.addProduct.length != 1) 
+                {
                     this.addProduct.pop();
                 }
             },
 
-            addThing: function(event, row) {
+            addThing: function(event, row) 
             {   
                 console.log(key);
 
